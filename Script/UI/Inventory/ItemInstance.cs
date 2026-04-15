@@ -4,8 +4,6 @@ using Godot;
 namespace MirrorWorldDemo.Script.UI.Inventory;
 
 
-
-
 public class ItemInstance
 {
     public ItemPrototype Prototype { get; }

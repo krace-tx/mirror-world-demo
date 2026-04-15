@@ -1,8 +1,14 @@
 using System;
 namespace MirrorWorldDemo.Script.UI.Inventory;
 
+/// <summary>
+/// Moves items from one inventory to another.
+/// </summary>
 public static class InventoryTransferService
 {
+	/// <summary>
+	/// amount < 0 means "move all".
+	/// </summary>
 	public static int Transfer(Inventory source, int sourceSlotIndex, Inventory target, int amount)
 	{
 		if (source == null || target == null || amount == 0)
@@ -22,6 +28,7 @@ public static class InventoryTransferService
 		}
 
 		ItemInstance movingItem = sourceSlot.Item.Clone();
+		// Respect container-level rules configured by caller.
 		if (!target.CanAcceptItem(movingItem) || !source.CanRemoveItem(movingItem))
 		{
 			return 0;

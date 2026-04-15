@@ -1,6 +1,10 @@
 using System;
 namespace MirrorWorldDemo.Script.UI.Inventory;
 
+/// <summary>
+/// Smallest mutable unit in an inventory.
+/// Handles stack operations and emits change notifications.
+/// </summary>
 public class Slot
 {
 	public event Action<Slot> OnChanged;
@@ -45,6 +49,7 @@ public class Slot
 
 		if (IsEmpty)
 		{
+			// Store a clone to prevent outside references from mutating slot state.
 			Item = item.Clone();
 			Amount = addable;
 		}
@@ -68,6 +73,7 @@ public class Slot
 		Amount -= removed;
 		if (Amount <= 0)
 		{
+			// Normalize empty state.
 			Item = null;
 			Amount = 0;
 		}
@@ -126,6 +132,7 @@ public class Slot
 
 		if (IsEmpty)
 		{
+			// Empty slot can accept up to max stack size for this item.
 			return _stackStrategy.GetMaxStackSize(incoming);
 		}
 

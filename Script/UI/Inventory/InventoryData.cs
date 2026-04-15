@@ -1,10 +1,13 @@
 using Godot;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 namespace MirrorWorldDemo.Script.UI.Inventory;
 
-public class Inventory : IEnumerable<Slot>
+/// <summary>
+/// Pure data container for inventory slots.
+/// UI listens to events from this class instead of reading state each frame.
+/// </summary>
+public class Inventory
 {
 	public event Action<int> OnSlotChanged;
 	public event Action<ItemInstance, int> OnItemAdded;
@@ -62,7 +65,7 @@ public class Inventory : IEnumerable<Slot>
 
 	public int AddItem(ItemInstance item, int amount)
 	{
-		if (!CanAccept(item, amount))
+		if (item == null || !item.IsValid || amount <= 0 || !CanAcceptItem(item))
 		{
 			return 0;
 		}
@@ -70,9 +73,13 @@ public class Inventory : IEnumerable<Slot>
 		int remaining = amount;
 		int totalAdded = 0;
 
-		for (int i = 0; i < _slots.Count && remaining > 0; i++)
+		foreach (Slot slot in _slots)
 		{
-			Slot slot = _slots[i];
+			if (remaining <= 0)
+			{
+				break;
+			}
+
 			if (slot.IsEmpty)
 			{
 				continue;
@@ -88,9 +95,13 @@ public class Inventory : IEnumerable<Slot>
 			totalAdded += added;
 		}
 
-		for (int i = 0; i < _slots.Count && remaining > 0; i++)
+		foreach (Slot slot in _slots)
 		{
-			Slot slot = _slots[i];
+			if (remaining <= 0)
+			{
+				break;
+			}
+
 			if (!slot.IsEmpty)
 			{
 				continue;
@@ -116,16 +127,20 @@ public class Inventory : IEnumerable<Slot>
 
 	public int RemoveItem(ItemInstance item, int amount)
 	{
-		if (!CanRemove(item, amount))
+		if (item == null || !item.IsValid || amount <= 0 || !CanRemoveItem(item))
 		{
 			return 0;
 		}
 
 		int remaining = amount;
 		int totalRemoved = 0;
-		for (int i = 0; i < _slots.Count && remaining > 0; i++)
+		foreach (Slot slot in _slots)
 		{
-			Slot slot = _slots[i];
+			if (remaining <= 0)
+			{
+				break;
+			}
+
 			if (slot.IsEmpty || slot.Item.QualifiedItemId != item.QualifiedItemId)
 			{
 				continue;
@@ -151,7 +166,7 @@ public class Inventory : IEnumerable<Slot>
 
 	public int RemoveFromSlot(int slotIndex, int amount)
 	{
-		if (!TryGetSlot(slotIndex, out Slot slot) || slot.IsEmpty || amount <= 0 || !CanRemove(slot.Item, amount))
+		if (!TryGetSlot(slotIndex, out Slot slot) || slot.IsEmpty || amount <= 0 || !CanRemoveItem(slot.Item))
 		{
 			return 0;
 		}
@@ -185,14 +200,17 @@ public class Inventory : IEnumerable<Slot>
 			return false;
 		}
 
-		int moved = to.AddItem(from.Item, from.Amount);
-		if (moved > 0)
+		if (to.IsEmpty)
 		{
-			from.RemoveItem(moved);
-			if (from.IsEmpty || to.IsEmpty)
-			{
-				return true;
-			}
+			from.Swap(to);
+			return true;
+		}
+
+		int merged = to.AddItem(from.Item, from.Amount);
+		if (merged > 0)
+		{
+			from.RemoveItem(merged);
+			return true;
 		}
 
 		from.Swap(to);
@@ -217,15 +235,14 @@ public class Inventory : IEnumerable<Slot>
 
 	public bool HasSpaceFor(ItemInstance item, int amount)
 	{
-		if (!CanAccept(item, amount))
+		if (item == null || !item.IsValid || amount <= 0 || !CanAcceptItem(item))
 		{
 			return false;
 		}
 
 		int remaining = amount;
-		for (int i = 0; i < _slots.Count; i++)
+		foreach (Slot slot in _slots)
 		{
-			Slot slot = _slots[i];
 			int free = slot.GetRemainingStackCapacity(item);
 			if (free <= 0)
 			{
@@ -298,7 +315,7 @@ public class Inventory : IEnumerable<Slot>
 		return saveData;
 	}
 
-	public void LoadSaveData(Godot.Collections.Array<Godot.Collections.Dictionary> saveData, Func<string, Script.UI.Inventory.ItemPrototype> prototypeResolver)
+	public void LoadSaveData(Godot.Collections.Array<Godot.Collections.Dictionary> saveData, Func<string, ItemPrototype> prototypeResolver)
 	{
 		if (saveData == null || prototypeResolver == null)
 		{
@@ -323,40 +340,19 @@ public class Inventory : IEnumerable<Slot>
 				continue;
 			}
 
-			Script.UI.Inventory.ItemPrototype prototype = prototypeResolver(itemId);
+			ItemPrototype prototype = prototypeResolver(itemId);
 			if (prototype == null)
 			{
 				continue;
 			}
 
-			// Durability has been removed from ItemInstance. Keep loading old saves by ignoring that field.
 			_slots[i].SetContents(new ItemInstance(prototype, customData), qty);
 		}
-	}
-
-	public IEnumerator<Slot> GetEnumerator()
-	{
-		return _slots.GetEnumerator();
-	}
-
-	IEnumerator IEnumerable.GetEnumerator()
-	{
-		return GetEnumerator();
 	}
 
 	private bool IsIndexValid(int index)
 	{
 		return index >= 0 && index < _slots.Count;
-	}
-
-	private bool CanAccept(ItemInstance item, int amount)
-	{
-		return item != null && item.IsValid && amount > 0 && CanAcceptItem(item);
-	}
-
-	private bool CanRemove(ItemInstance item, int amount)
-	{
-		return item != null && item.IsValid && amount > 0 && CanRemoveItem(item);
 	}
 
 	private void HandleSlotChanged(Slot slot)

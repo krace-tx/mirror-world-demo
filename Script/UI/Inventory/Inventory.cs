@@ -2,14 +2,18 @@ using Godot;
 using System.Collections.Generic;
 namespace MirrorWorldDemo.Script.UI.Inventory;
 
+/// <summary>
+/// Inventory UI view/controller.
+/// Keeps rendering concerns here and delegates data logic to InventoryData.
+/// </summary>
 public partial class Intventory : Control
 {
-	[Export(PropertyHint.Range, "8,12,1")] public int Columns { get; set; } = 12;
-	[Export(PropertyHint.Range, "1,6,1")] public int ExtraRows { get; set; } = 2;
+	[Export(PropertyHint.Range, "1,12,1")] public int Columns { get; set; } = 4;
+	[Export(PropertyHint.Range, "1,12,1")] public int ExtraRows { get; set; } = 6;
 	[Export(PropertyHint.Range, "8,12,1")] public int HotbarCount { get; set; } = 12;
-	[Export] public Vector2 SlotSize { get; set; } = new(56, 56);
+	[Export] public Vector2 SlotSize { get; set; } = new(44, 44);
 	[Export] public bool ShowDebugText { get; set; } = true;
-	[Export] public Godot.Collections.Array<Script.UI.Inventory.ItemPrototype> DebugStartingItems { get; set; } = new();
+	[Export] public Godot.Collections.Array<ItemPrototype> DebugStartingItems { get; set; } = new();
 
 	private HBoxContainer _hotbarRow;
 	private GridContainer _backpackGrid;
@@ -19,9 +23,9 @@ public partial class Intventory : Control
 
 	public override void _Ready()
 	{
-		_hotbarRow = GetNode<HBoxContainer>("CenterContainer/FramePanel/Padding/RootVBox/HotbarRow");
-		_backpackGrid = GetNode<GridContainer>("CenterContainer/FramePanel/Padding/RootVBox/BackpackGrid");
-		_framePanel = GetNode<PanelContainer>("CenterContainer/FramePanel");
+		_hotbarRow = GetNode<HBoxContainer>("InventoryUI/FramePanel/Padding/RootVBox/ContentRow/SlotColumn/HotbarRow");
+		_backpackGrid = GetNode<GridContainer>("InventoryUI/FramePanel/Padding/RootVBox/ContentRow/SlotColumn/BackpackGrid");
+		_framePanel = GetNode<PanelContainer>("InventoryUI/FramePanel");
 
 		ApplyFrameStyle();
 		RebuildSlotWidgets();
@@ -40,7 +44,7 @@ public partial class Intventory : Control
 	{
 		for (int i = 0; i < DebugStartingItems.Count; i++)
 		{
-			Script.UI.Inventory.ItemPrototype prototype = DebugStartingItems[i];
+			ItemPrototype prototype = DebugStartingItems[i];
 			if (prototype == null)
 			{
 				continue;

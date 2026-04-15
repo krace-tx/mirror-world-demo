@@ -1,12 +1,18 @@
 using System;
 namespace MirrorWorldDemo.Script.UI.Inventory;
 
+/// <summary>
+/// Encapsulates stack rules so different containers can use different policies.
+/// </summary>
 public interface IStackStrategy
 {
 	bool CanStack(ItemInstance current, ItemInstance incoming);
 	int GetMaxStackSize(ItemInstance item);
 }
 
+/// <summary>
+/// Default rule: same stack key and stack size > 1.
+/// </summary>
 public class DefaultStackStrategy : IStackStrategy
 {
 	public bool CanStack(ItemInstance current, ItemInstance incoming)
@@ -41,6 +47,7 @@ public class ShopStackStrategy : IStackStrategy
 
 	public bool CanStack(ItemInstance current, ItemInstance incoming)
 	{
+		// Some shop flows intentionally disable stacking to keep trade behavior explicit.
 		if (!_allowStacking)
 		{
 			return false;
