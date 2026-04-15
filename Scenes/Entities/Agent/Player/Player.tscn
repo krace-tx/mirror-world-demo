@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://canxi36qyy46y"]
 
-[ext_resource type="Script" uid="uid://dy6hqcm1g1mq6" path="res://Scenes/Agent/Player/Player.cs" id="1_3bmug"]
+[ext_resource type="Script" uid="uid://dy6hqcm1g1mq6" path="res://Scenes/Entities/Agent/Player/Player.cs" id="1_3bmug"]
 [ext_resource type="Texture2D" uid="uid://ckgdh7mmn5hb1" path="res://Assets/Art/Characters/Abigail_Beach.png" id="2_3bmug"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w5eqy"]

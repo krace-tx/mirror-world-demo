@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bpuegqyav4bap"]
 
 [ext_resource type="PackedScene" uid="uid://uxpaj0qabq0b" path="res://Assets/Art/Ldtk/FarmHouse.ldtk" id="1_md86m"]
-[ext_resource type="Script" uid="uid://5xu516ewvm7g" path="res://Scenes/Farm/FarmHouse.cs" id="2_ymkr4"]
+[ext_resource type="Script" uid="uid://5xu516ewvm7g" path="res://Scenes/Maps/Farm/FarmHouse.cs" id="2_ymkr4"]
 
 [node name="FarmHouse" unique_id=1234827351 instance=ExtResource("1_md86m")]
 script = ExtResource("2_ymkr4")

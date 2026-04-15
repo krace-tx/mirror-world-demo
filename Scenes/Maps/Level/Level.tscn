@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://fuflvcw2edow"]
+
+[ext_resource type="Script" uid="uid://dt4qmr10lstu4" path="res://Scenes/Maps/Level/Level.cs" id="1_cmk6n"]
+[ext_resource type="PackedScene" uid="uid://bpuegqyav4bap" path="res://Scenes/Maps/Farm/FarmHouse.tscn" id="2_i3fi7"]
+[ext_resource type="PackedScene" uid="uid://canxi36qyy46y" path="res://Scenes/Entities/Agent/Player/Player.tscn" id="3_cmk6n"]
+
+[node name="Main" type="Node2D" unique_id=205740166]
+script = ExtResource("1_cmk6n")
+
+[node name="Player" parent="." unique_id=595016949 instance=ExtResource("3_cmk6n")]
+position = Vector2(90, 244)
+
+[node name="FarmHouse" parent="." unique_id=1234827351 instance=ExtResource("2_i3fi7")]

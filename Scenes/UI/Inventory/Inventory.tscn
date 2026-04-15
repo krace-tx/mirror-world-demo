@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://b3nnbkru4wabq"]
+
+[ext_resource type="Script" uid="uid://dy3cxh7wvkf3t" path="res://Scenes/UI/Inventory/Inventory.cs" id="1_0hwtf"]
+
+[node name="Intventory" type="Control" unique_id=800132160]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0hwtf")
+
+[node name="Backdrop" type="ColorRect" parent="." unique_id=1534449895]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.45)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1735163950]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FramePanel" type="PanelContainer" parent="CenterContainer" unique_id=1493131230]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Padding" type="MarginContainer" parent="CenterContainer/FramePanel" unique_id=2088270318]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="RootVBox" type="VBoxContainer" parent="CenterContainer/FramePanel/Padding" unique_id=1299379406]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Header" type="Label" parent="CenterContainer/FramePanel/Padding/RootVBox" unique_id=1728320844]
+layout_mode = 2
+text = "Backpack"
+horizontal_alignment = 1
+
+[node name="HotbarRow" type="HBoxContainer" parent="CenterContainer/FramePanel/Padding/RootVBox" unique_id=1715147222]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="BackpackGrid" type="GridContainer" parent="CenterContainer/FramePanel/Padding/RootVBox" unique_id=1147785695]
+layout_mode = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+columns = 12
