@@ -1,0 +1,313 @@
+[gd_scene format=3 uid="uid://bmmcko1gj5v8v"]
+
+[ext_resource type="PackedScene" uid="uid://dk35y45c774bk" path="res://Scenes/UI/Inventory/InventorySlot.tscn" id="1_slot"]
+[ext_resource type="FontFile" uid="uid://be5i5dahwmo4s" path="res://Assets/Fonts/Cairo-Bold.ttf" id="2_font"]
+[ext_resource type="PackedScene" uid="uid://canxi36qyy46y" path="res://Scenes/Entities/Agent/Player/Player.tscn" id="2_kisst"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_canvas_frame"]
+bg_color = Color(0.93, 0.88, 0.8, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.62, 0.52, 0.4, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_canvas_inset"]
+bg_color = Color(0.87, 0.8, 0.7, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.58, 0.49, 0.38, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_canvas_btn"]
+bg_color = Color(0.84, 0.76, 0.64, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.55, 0.46, 0.35, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="InventoryView" type="PanelContainer" unique_id=591080413]
+custom_minimum_size = Vector2(300, 240)
+offset_right = 300.0
+offset_bottom = 240.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_canvas_frame")
+
+[node name="MainMargin" type="MarginContainer" parent="." unique_id=1804576453]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="BookLayout" type="HBoxContainer" parent="MainMargin" unique_id=1469341811]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LeftPage" type="VBoxContainer" parent="MainMargin/BookLayout" unique_id=1048262445]
+custom_minimum_size = Vector2(136, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="EquipmentPanel" type="PanelContainer" parent="MainMargin/BookLayout/LeftPage" unique_id=339249032]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_canvas_inset")
+
+[node name="EquipMargin" type="MarginContainer" parent="MainMargin/BookLayout/LeftPage/EquipmentPanel" unique_id=47688206]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="EquipLayout" type="VBoxContainer" parent="MainMargin/BookLayout/LeftPage/EquipmentPanel/EquipMargin" unique_id=968333578]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="EquipmentTitle" type="Label" parent="MainMargin/BookLayout/LeftPage/EquipmentPanel/EquipMargin/EquipLayout" unique_id=697954178]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.26, 0.18, 0.12, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 8
+text = "EQUIPMENT"
+horizontal_alignment = 1
+
+[node name="EquipBody" type="HBoxContainer" parent="MainMargin/BookLayout/LeftPage/EquipmentPanel/EquipMargin/EquipLayout" unique_id=599564426]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="CharacterPanel" type="PanelContainer" parent="MainMargin/BookLayout/LeftPage/EquipmentPanel/EquipMargin/EquipLayout/EquipBody" unique_id=942866969]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_canvas_inset")
+
+[node name="CharacterCenter" type="CenterContainer" parent="MainMargin/BookLayout/LeftPage/EquipmentPanel/EquipMargin/EquipLayout/EquipBody/CharacterPanel" unique_id=1071744426]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="Player" parent="MainMargin/BookLayout/LeftPage/EquipmentPanel/EquipMargin/EquipLayout/EquipBody/CharacterPanel/CharacterCenter" unique_id=595016949 instance=ExtResource("2_kisst")]
+
+[node name="LeftSlots" type="VBoxContainer" parent="MainMargin/BookLayout/LeftPage/EquipmentPanel/EquipMargin/EquipLayout/EquipBody" unique_id=1050343228]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 8
+
+[node name="HeadSlot" parent="MainMargin/BookLayout/LeftPage/EquipmentPanel/EquipMargin/EquipLayout/EquipBody/LeftSlots" unique_id=630988948 instance=ExtResource("1_slot")]
+layout_mode = 2
+
+[node name="NecklaceSlot" parent="MainMargin/BookLayout/LeftPage/EquipmentPanel/EquipMargin/EquipLayout/EquipBody/LeftSlots" unique_id=1620750413 instance=ExtResource("1_slot")]
+layout_mode = 2
+
+[node name="RightSlots" type="VBoxContainer" parent="MainMargin/BookLayout/LeftPage/EquipmentPanel/EquipMargin/EquipLayout/EquipBody" unique_id=619717268]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 8
+
+[node name="ArmorSlot" parent="MainMargin/BookLayout/LeftPage/EquipmentPanel/EquipMargin/EquipLayout/EquipBody/RightSlots" unique_id=268187965 instance=ExtResource("1_slot")]
+layout_mode = 2
+
+[node name="RingSlot" parent="MainMargin/BookLayout/LeftPage/EquipmentPanel/EquipMargin/EquipLayout/EquipBody/RightSlots" unique_id=1311620739 instance=ExtResource("1_slot")]
+layout_mode = 2
+
+[node name="DetailPanel" type="PanelContainer" parent="MainMargin/BookLayout/LeftPage" unique_id=1269994779]
+custom_minimum_size = Vector2(0, 78)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_canvas_inset")
+
+[node name="DetailMargin" type="MarginContainer" parent="MainMargin/BookLayout/LeftPage/DetailPanel" unique_id=982164017]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="DetailLayout" type="HBoxContainer" parent="MainMargin/BookLayout/LeftPage/DetailPanel/DetailMargin" unique_id=604073728]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="DetailIcon" parent="MainMargin/BookLayout/LeftPage/DetailPanel/DetailMargin/DetailLayout" unique_id=598857008 instance=ExtResource("1_slot")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="DetailText" type="VBoxContainer" parent="MainMargin/BookLayout/LeftPage/DetailPanel/DetailMargin/DetailLayout" unique_id=1550848992]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="ItemName" type="Label" parent="MainMargin/BookLayout/LeftPage/DetailPanel/DetailMargin/DetailLayout/DetailText" unique_id=139123873]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.26, 0.18, 0.12, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 7
+text = "Broad Sword"
+horizontal_alignment = 1
+
+[node name="ItemDescScroll" type="ScrollContainer" parent="MainMargin/BookLayout/LeftPage/DetailPanel/DetailMargin/DetailLayout/DetailText" unique_id=192917864]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 0
+
+[node name="ItemDesc" type="Label" parent="MainMargin/BookLayout/LeftPage/DetailPanel/DetailMargin/DetailLayout/DetailText/ItemDescScroll" unique_id=1823341120]
+custom_minimum_size = Vector2(83, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.32, 0.24, 0.18, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 5
+text = "重型近战武器，造成额外破甲。重型近战武器，造成额外破甲。
+
+"
+autowrap_mode = 3
+
+[node name="RightPage" type="VBoxContainer" parent="MainMargin/BookLayout" unique_id=1409572851]
+custom_minimum_size = Vector2(136, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InventoryPanel" type="PanelContainer" parent="MainMargin/BookLayout/RightPage" unique_id=541959209]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_canvas_inset")
+
+[node name="InventoryMargin" type="MarginContainer" parent="MainMargin/BookLayout/RightPage/InventoryPanel" unique_id=938011171]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="InventoryLayout" type="VBoxContainer" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin" unique_id=1414614841]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="InventoryTitleRow" type="HBoxContainer" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin/InventoryLayout" unique_id=785391742]
+layout_mode = 2
+
+[node name="InventoryTitle" type="Label" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin/InventoryLayout/InventoryTitleRow" unique_id=627994380]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.26, 0.18, 0.12, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 8
+text = "INVENTORY"
+
+[node name="CloseButton" type="Button" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin/InventoryLayout/InventoryTitleRow" unique_id=1308328246]
+custom_minimum_size = Vector2(18, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.26, 0.18, 0.12, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 6
+theme_override_styles/normal = SubResource("StyleBoxFlat_canvas_btn")
+text = "ESC"
+
+[node name="BagGridCenter" type="HBoxContainer" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin/InventoryLayout" unique_id=1949308557]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="BagGrid" type="GridContainer" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin/InventoryLayout/BagGridCenter" unique_id=1949308558]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 4
+
+[node name="Slot01" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin/InventoryLayout/BagGridCenter/BagGrid" unique_id=1295922470 instance=ExtResource("1_slot")]
+layout_mode = 2
+
+[node name="Slot02" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin/InventoryLayout/BagGridCenter/BagGrid" unique_id=1396959871 instance=ExtResource("1_slot")]
+layout_mode = 2
+
+[node name="Slot03" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin/InventoryLayout/BagGridCenter/BagGrid" unique_id=993500027 instance=ExtResource("1_slot")]
+layout_mode = 2
+
+[node name="Slot04" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin/InventoryLayout/BagGridCenter/BagGrid" unique_id=1647849040 instance=ExtResource("1_slot")]
+layout_mode = 2
+
+[node name="Slot05" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin/InventoryLayout/BagGridCenter/BagGrid" unique_id=73375977 instance=ExtResource("1_slot")]
+layout_mode = 2
+
+[node name="Slot06" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin/InventoryLayout/BagGridCenter/BagGrid" unique_id=1274389751 instance=ExtResource("1_slot")]
+layout_mode = 2
+
+[node name="Slot07" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin/InventoryLayout/BagGridCenter/BagGrid" unique_id=1828068969 instance=ExtResource("1_slot")]
+layout_mode = 2
+
+[node name="Slot08" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin/InventoryLayout/BagGridCenter/BagGrid" unique_id=787212843 instance=ExtResource("1_slot")]
+layout_mode = 2
+
+[node name="Slot09" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin/InventoryLayout/BagGridCenter/BagGrid" unique_id=1178236433 instance=ExtResource("1_slot")]
+layout_mode = 2
+
+[node name="Slot10" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin/InventoryLayout/BagGridCenter/BagGrid" unique_id=1218573535 instance=ExtResource("1_slot")]
+layout_mode = 2
+
+[node name="Slot11" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin/InventoryLayout/BagGridCenter/BagGrid" unique_id=1742860255 instance=ExtResource("1_slot")]
+layout_mode = 2
+
+[node name="Slot12" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin/InventoryLayout/BagGridCenter/BagGrid" unique_id=233841282 instance=ExtResource("1_slot")]
+layout_mode = 2
+
+[node name="Slot13" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin/InventoryLayout/BagGridCenter/BagGrid" unique_id=1657864871 instance=ExtResource("1_slot")]
+layout_mode = 2
+
+[node name="Slot14" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin/InventoryLayout/BagGridCenter/BagGrid" unique_id=2127899587 instance=ExtResource("1_slot")]
+layout_mode = 2
+
+[node name="Slot15" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin/InventoryLayout/BagGridCenter/BagGrid" unique_id=922126383 instance=ExtResource("1_slot")]
+layout_mode = 2
+
+[node name="Slot16" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin/InventoryLayout/BagGridCenter/BagGrid" unique_id=1474877301 instance=ExtResource("1_slot")]
+layout_mode = 2
+
+[node name="PagerRow" type="HBoxContainer" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin/InventoryLayout" unique_id=151579327]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="PrevPage" type="Button" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin/InventoryLayout/PagerRow" unique_id=1880718173]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.26, 0.18, 0.12, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 6
+theme_override_styles/normal = SubResource("StyleBoxFlat_canvas_btn")
+text = "<"
+
+[node name="PageText" type="Label" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin/InventoryLayout/PagerRow" unique_id=1665660757]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.26, 0.18, 0.12, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 6
+text = "1 / 10"
+
+[node name="NextPage" type="Button" parent="MainMargin/BookLayout/RightPage/InventoryPanel/InventoryMargin/InventoryLayout/PagerRow" unique_id=1871805156]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.26, 0.18, 0.12, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 6
+theme_override_styles/normal = SubResource("StyleBoxFlat_canvas_btn")
+text = ">"

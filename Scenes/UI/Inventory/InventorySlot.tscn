@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://dk35y45c774bk"]
+
+[ext_resource type="Script" path="res://Scenes/UI/Inventory/InventorySlot.cs" id="1_xjdbn"]
+[ext_resource type="Texture2D" uid="uid://dem81vcn661pb" path="res://Assets/Art/UI/HighlightSlot_26x26.png" id="2_xjdbn"]
+[ext_resource type="Texture2D" uid="uid://b1yc52fg82qo0" path="res://Assets/Art/UI/ItemsIcons_24x24.png" id="3_ddtjy"]
+[ext_resource type="FontFile" uid="uid://be5i5dahwmo4s" path="res://Assets/Fonts/Cairo-Bold.ttf" id="4_r8mwa"]
+
+[node name="Slot" type="Control" unique_id=593866605]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_xjdbn")
+
+[node name="Button" type="Button" parent="." unique_id=322326749]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Select" type="TextureRect" parent="." unique_id=197785837]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_xjdbn")
+
+[node name="IconAnchor" type="Control" parent="." unique_id=277392184]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="Sprite2D" parent="IconAnchor" unique_id=611952899]
+texture = ExtResource("3_ddtjy")
+hframes = 5
+vframes = 5
+
+[node name="Quantity" type="Label" parent="." unique_id=1967991188]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -6.0
+offset_top = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.68612224, 0.5435948, 0.27927327, 1)
+theme_override_fonts/font = ExtResource("4_r8mwa")
+theme_override_font_sizes/font_size = 5
+text = "x1"
+horizontal_alignment = 2

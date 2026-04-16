@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="MirrorWorldDemo"
-run/main_scene="uid://b3nnbkru4wabq"
+run/main_scene="uid://fuflvcw2edow"
 config/features=PackedStringArray("4.6", "C#", "Mobile")
 config/icon="res://icon.svg"
 
